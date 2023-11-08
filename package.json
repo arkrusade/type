@@ -1,0 +1,19 @@
+{
+  "engines": {
+    "npm": ">=8.19.2",
+    "node": ">=18.12.0"
+  },
+  "name": "typing",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "npx http-server"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
