@@ -71,13 +71,13 @@ class TypingSingleton {
         ['.', '>'],
         ['/', '?'],
     ];
-    typeable_keys = [];
+    typeable_keys: string[] = [];
     durations: number[] = [];
 
     constructor() {
         this.shifted_keys.forEach(key => {
-            typeable_keys.push(key[0]);
-            typeable_keys.push(key[1]);
+            this.typeable_keys.push(key[0]);
+            this.typeable_keys.push(key[1]);
         });
         // this.typeable_keys.forEach(key => {
         //     this.typeable_keys.forEach(key1 => {
@@ -110,6 +110,7 @@ class TypingSingleton {
         this.durations = [];
         const timeElapsed = current[current.length - 1] - current[0];
 
+                // this.key_to_key_ms.push({});
         console.log([
             ['time elapsed:', this.displayMillis(timeElapsed)].join(' '),
             ['keys duration:', this.calculateDurationSince(current).map(this.displayMillis)].join(' ')
@@ -122,16 +123,20 @@ class TypingSingleton {
         // console.log('keydown', e.code, e);
         console.log('keydown', e.code, e);
         if (e instanceof KeyboardEvent) {
+            if (e.target == null || !(e.target instanceof HTMLInputElement)) {
+                console.log('NOT INPUT EVENT??', e.target);
+                return;
+            }
             if (e.code === 'Enter') {
-                const value = e.target?.value;
+                const value = e.target.value;
                 console.log('Enter', value);
-                window.document.getElementById('typetext').textContent = value;
-                endDurationEvent();
-            } else if (typeable_keys.includes(e.key)) {
-                window.document.getElementById('outputtext').textContent = durations;
+                window.document.getElementById('typetext')!.textContent = value;
+                this.endDurationEvent();
+            } else if (this.typeable_keys.includes(e.key)) {
+                window.document.getElementById('outputtext')!.textContent = this.durations.toString();
                 console.log('FOUND key', e.key);
-                endDurationEvent();
-                addDurationEvent();
+                this.endDurationEvent();
+                this.addDurationEvent();
             }
         }
     }
