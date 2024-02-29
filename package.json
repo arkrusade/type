@@ -9,11 +9,13 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "type": "module",
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "npx http-server -c-1 -p 8080"
   },
   "dependencies": {
+    "@tsconfig/node18": "^18.2.2",
     "http-server": "^14.1.1"
   }
 }

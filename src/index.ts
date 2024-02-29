@@ -1,12 +1,11 @@
-import TypingSingleton from "./typing"
+import { TypingSingleton } from "./typing"
 
 window.addEventListener('DOMContentLoaded', function (e) {
     console.log('loaded123');
     const singleton = new TypingSingleton();
-    this.document.getElementById('in')
-        .addEventListener('keydown', singleton.keydownhandler, false);
-    this.document.getElementById('in')
-        .addEventListener('keyup', function (e) {
+    const input = this.document.getElementById('in')!;
+    input.addEventListener('keydown', singleton.keydownhandler, false);
+    input.addEventListener('keyup', function (e) {
             // console.log('keyup', e);
             console.log('keyup', e.code);
         }, false);

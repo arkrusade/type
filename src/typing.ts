@@ -1,10 +1,13 @@
-class Timestamps {
+type Timestamps = {
     timestamps: number[];
 };
 
 type KTime = Map<string, Timestamps>;
 class K2KTime {
     keymap: Map<string, KTime>;
+    constructor() {
+        this.keymap = new Map();
+    }
     getPairTimestamps(key1: string, key2: string) {
         return this.keymap.get(key1)?.get(key2)?.timestamps;
     }
@@ -13,7 +16,7 @@ class K2KTime {
     }
 }
 
-class TypingSingleton {
+export class TypingSingleton {
     key_to_key_ms: K2KTime[] = [];
     shifted_keys = [
         // number row
@@ -86,15 +89,15 @@ class TypingSingleton {
         // });
     }
 
-    calculateDurationSince(timestamps) {
+    calculateDurationSince(timestamps: number[]) {
         const last = timestamps.pop();
         while (timestamps.length) {
-            this.durations.push(last - timestamps.pop());
+            this.durations.push(last! - timestamps.pop()!);
         }
         return this.durations.reverse();
     }
 
-    displayMillis(mills) {
+    displayMillis(mills: number) {
         if (mills > 1000)
             return (mills / 1000) + ' s';
         return mills + ' ms';
